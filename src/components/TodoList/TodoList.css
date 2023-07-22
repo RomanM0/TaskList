@@ -1,0 +1,34 @@
+.todoList{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.todoItem{
+    display: flex;
+    flex-direction: column;
+}
+.todoButtons{
+    margin-top: 9px;
+}
+.TodoBtn{
+    color: #fff;
+    width: 100px;
+    height: 35px;
+    border: none;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    font-size: 11.5pt;
+}
+.TodoBtn:hover{
+    text-decoration: underline;
+}
+.deleteBtn{
+    background-color: rgb(218, 9, 9);
+}
+.doBtn{
+    background-color: rgb(224, 224, 0);
+}
+.editBtn{
+    background-color: green;
+}
