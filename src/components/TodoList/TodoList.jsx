@@ -14,36 +14,44 @@ export default function TodoList({ todo, setTodo }) {
     function deleteTodo(id) {
         let newTodo = [...todo].filter(item => item.id !== id);
         setTodo(newTodo);
-        
+        // document.title = 'Завдань: '+todo.length
     }
     function statusTodo(id) {
-        let TodoTitle = id+'_title'
         let newTodo = [...todo].filter(item => {
-            if (item.id == id) {
-                if(item.status === false){
-                    
-                }
+            if (item.id === id) {
                 item.status = !item.status;
                 console.log(id)
-                TodoTitle.setState({text: '123'})
             }
             return item;
             
         });
         setTodo(newTodo);
-        
+        // document.title = 'Завдань: '+todo.length
 
     }
 
     function editTodo(id){
-        
+    
+    }
+    function updateTitle(){
+        let taskCount = 0;
+        [...todo].filter(todo => {
+            if (todo.status === true) {
+                taskCount++
+            }
+        });
+    console.log(todo)
+        return taskCount;
     }
     useEffect(()=>{
         if(firstTimeRef.current === true){
         getLocalStorageList();
         firstTimeRef.current = false;
         }
+        document.title = 'Todo List | Завдань: '+todo.length + '; Виконано: ' + updateTitle()
+
         setLocalStorageList()
+        
     })
     return (
         <div className='todoList'>
@@ -52,7 +60,7 @@ export default function TodoList({ todo, setTodo }) {
                 todo.map(item =>
                     <div className='todoItem' key={item.id}>
                         
-                        <div className='todoItemTitle' key={item.id+'_title'}>{item.title}</div>
+                        <div className='todoItemTitle' style={{textDecoration: item.status === true && 'line-through'}} key={item.id+'_title'}>{item.title}</div>
                         <div className="todoButtons">
                         <button className='TodoBtn deleteBtn' onClick={() => deleteTodo(item.id)}>Видалити</button>
                         <button className='TodoBtn doBtn' onClick={() => statusTodo(item.id)}>Виконати</button>

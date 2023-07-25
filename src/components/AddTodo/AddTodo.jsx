@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef} from 'react'
+import React, { useState, useRef } from 'react'
 import './AddTodo.css'
 import { v4 as uuid } from 'uuid'
 
@@ -7,7 +7,7 @@ function AddTodo({ todo, setTodo }) {
     let placeholderTimer
     const [value, setValue] = useState('');
     function saveTodo() {
-        if(value != ''){
+        if(value !== ''){
         setTodo([...todo, {
             id: uuid(),
             title: value,
@@ -17,7 +17,7 @@ function AddTodo({ todo, setTodo }) {
         clearTimeout()
         inputRef.current.placeholder = 'Введи завдання'
     }
-    else if(value == ''){
+    else if(value === ''){
         inputRef.current.placeholder = 'Введіть назву завдання, щоб додати його у список!'
         placeholderTimer = setTimeout(function(){
             inputRef.current.placeholder = 'Введи завдання'
