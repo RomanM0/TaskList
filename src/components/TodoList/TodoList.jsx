@@ -30,7 +30,7 @@ export default function TodoList({ todo, setTodo }) {
     }
 
     function editTodo(id){
-
+        alert('Ця функція ще у розробці... / This function is still at development...')
     }
     function updateTitle(){
         let taskCount = 0;
