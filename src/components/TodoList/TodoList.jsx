@@ -20,7 +20,6 @@ export default function TodoList({ todo, setTodo }) {
         let newTodo = [...todo].filter(item => {
             if (item.id === id) {
                 item.status = !item.status;
-                console.log(id)
             }
             return item;
             
@@ -31,7 +30,7 @@ export default function TodoList({ todo, setTodo }) {
     }
 
     function editTodo(id){
-    
+
     }
     function updateTitle(){
         let taskCount = 0;
@@ -60,7 +59,7 @@ export default function TodoList({ todo, setTodo }) {
                 todo.map(item =>
                     <div className='todoItem' key={item.id}>
                         
-                        <div className='todoItemTitle' style={{textDecoration: item.status === true && 'line-through'}} key={item.id+'_title'}>{item.title}</div>
+                        <h3 className='todoItemTitle' style={{textDecoration: item.status === true && 'line-through', color: item.status === true && 'gray'}} key={item.id+'_title'}>{item.title}</h3>
                         <div className="todoButtons">
                         <button className='TodoBtn deleteBtn' onClick={() => deleteTodo(item.id)}>Видалити</button>
                         <button className='TodoBtn doBtn' onClick={() => statusTodo(item.id)}>Виконати</button>

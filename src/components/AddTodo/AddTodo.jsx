@@ -7,18 +7,20 @@ function AddTodo({ todo, setTodo }) {
     let placeholderTimer
     const [value, setValue] = useState('');
     function saveTodo() {
-        if(value !== ''){
+        if(!/\S/.test(value) === false){
         setTodo([...todo, {
             id: uuid(),
             title: value,
-            status: false
+            status: false,
+            editing: false
         }])
         setValue('');
         clearTimeout()
         inputRef.current.placeholder = 'Введи завдання'
     }
-    else if(value === ''){
+    else{
         inputRef.current.placeholder = 'Введіть назву завдання, щоб додати його у список!'
+        inputRef.current.value = ''
         placeholderTimer = setTimeout(function(){
             inputRef.current.placeholder = 'Введи завдання'
         },1500)
