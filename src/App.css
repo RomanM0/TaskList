@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap');
 *{
   margin:0;
   padding: 0;
@@ -11,4 +11,5 @@
   min-height: 100vh;
   display:flex;
   flex-direction:column;
+  background-color: rgb(56, 54, 54);
 }

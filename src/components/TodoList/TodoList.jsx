@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './TodoList.css'
 export default function TodoList({ todo, setTodo }) {
     let firstTime = true;
     let firstTimeRef = useRef(firstTime)
+    let [editWindowState, setEditWindowState] = useState(false)
     function getLocalStorageList(){
         setTodo(JSON.parse(localStorage.getItem('taskList')))
     }
@@ -14,7 +15,6 @@ export default function TodoList({ todo, setTodo }) {
     function deleteTodo(id) {
         let newTodo = [...todo].filter(item => item.id !== id);
         setTodo(newTodo);
-        // document.title = 'Завдань: '+todo.length
     }
     function statusTodo(id) {
         let newTodo = [...todo].filter(item => {
@@ -25,12 +25,29 @@ export default function TodoList({ todo, setTodo }) {
             
         });
         setTodo(newTodo);
-        // document.title = 'Завдань: '+todo.length
 
     }
 
+    window.addEventListener("unload", (e)=>{
+        let newTodo = [...todo].filter(item => {
+                item.editing = false;
+            return item;
+            
+        });
+        setTodo(newTodo);
+    })
     function editTodo(id){
-        alert('Ця функція ще у розробці... / This function is still at development...')
+        window.onbeforeunload = function(){
+            return 'Do you want to leave the page? Editing the todo task will be cancelled'
+        } 
+        setEditWindowState(true)     
+        let newTodo = [...todo].filter(item => 
+            {
+                if (item.id === id) {
+                    item.editing = !item.editing
+                }
+            }
+        );
     }
     function updateTitle(){
         let taskCount = 0;
@@ -47,23 +64,30 @@ export default function TodoList({ todo, setTodo }) {
         getLocalStorageList();
         firstTimeRef.current = false;
         }
-        document.title = 'Todo List | Завдань: '+todo.length + '; Виконано: ' + updateTitle()
+        document.title = 'Todo List | Tasks: '+todo.length + '; Done: ' + updateTitle()
 
         setLocalStorageList()
         
     })
     return (
+        
         <div className='todoList'>
-
+            <div className='editWindow' style={{display: editWindowState === true && 'flex'}}>
+         <p className='editWindowTitle'>Edit task</p>
+         <div className="editContainer">
+         <input type="text" className="inputAddTodo" placeholder='Name...' />
+         <button className='TodoBtn editBtn' onClick={()=> setEditWindowState(false)}>OK</button>
+         </div>
+     </div>
             {
                 todo.map(item =>
                     <div className='todoItem' key={item.id}>
                         
                         <h3 className='todoItemTitle' style={{textDecoration: item.status === true && 'line-through', color: item.status === true && 'gray'}} key={item.id+'_title'}>{item.title}</h3>
                         <div className="todoButtons">
-                        <button className='TodoBtn deleteBtn' onClick={() => deleteTodo(item.id)}>Видалити</button>
-                        <button className='TodoBtn doBtn' onClick={() => statusTodo(item.id)}>Виконати</button>
-                        <button className='TodoBtn editBtn' onClick={() => editTodo(item.id)}>Редагувати</button>
+                        <button className='TodoBtn deleteBtn' onClick={() => deleteTodo(item.id)}>🗑 Delete</button>
+                        <button className='TodoBtn doBtn' onClick={() => statusTodo(item.id)}>✅ Do it</button>
+                        <button className='TodoBtn editBtn' onClick={() => editTodo(item.id)}>✏️ Edit</button>
                         </div>
                     </div>
                     

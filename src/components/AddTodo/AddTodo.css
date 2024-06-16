@@ -7,9 +7,25 @@
     width: 70%;
     height: 30px;
     font-size: 12pt;
+    border-radius: 30px;
+    padding-left: 20px;
+    background-color: #000;
+    border: 2px solid #fff;
+    color: #fff;
 }
 .submitButton{
     margin-left: 10px;
     width: 100px;
     font-size: 12pt;
+    background-color: #000;
+    border-radius: 50px;
+    border: 2px solid #fff;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+    font-weight: 600;
+}
+.submitButton:hover{
+    background-color: blue;
+    transition: 0.5s;
 }

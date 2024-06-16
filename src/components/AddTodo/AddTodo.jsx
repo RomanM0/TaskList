@@ -16,13 +16,13 @@ function AddTodo({ todo, setTodo }) {
         }])
         setValue('');
         clearTimeout()
-        inputRef.current.placeholder = 'Введи завдання'
+        inputRef.current.placeholder = 'Enter the name of task'
     }
     else{
-        inputRef.current.placeholder = 'Введіть назву завдання, щоб додати його у список!'
+        inputRef.current.placeholder = 'Empty name of task. Enter the task name to add it.'
         inputRef.current.value = ''
         placeholderTimer = setTimeout(function(){
-            inputRef.current.placeholder = 'Введи завдання'
+            inputRef.current.placeholder = 'Enter the name of task'
         },1500)
         
     }
@@ -31,8 +31,8 @@ function AddTodo({ todo, setTodo }) {
     
     return (
         <div className='addTodo'>
-            <input className='inputAddTodo' type="text" ref={inputRef} onKeyDown={(e) => {if(e.keyCode === 13){saveTodo()}}} placeholder='Введи завдання' value={value} onChange={(e) => setValue(e.target.value)} />
-            <button className='submitButton' onClick={saveTodo}>Додати +</button>
+            <input className='inputAddTodo' type="text" ref={inputRef} onKeyDown={(e) => {if(e.keyCode === 13){saveTodo()}}} placeholder='Enter the name of task' value={value} onChange={(e) => setValue(e.target.value)} />
+            <button className='submitButton' onClick={saveTodo}>➕ Add</button>
         </div>
     )
 }
